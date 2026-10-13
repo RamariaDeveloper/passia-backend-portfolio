@@ -8,6 +8,33 @@ The backend was designed not only as an API implementation, but as an architectu
 
 ---
 
+## Online MVP & Endpoint Demo
+
+**The Passia MVP backend is hosted online on Render for personal portfolio demonstrations.** This is a personal, non-remunerated project. Regular development remains paused during its creator’s medical leave. The video below demonstrates requests sent from Postman to the hosted API, with data persisted in PostgreSQL and authentication delegated to Auth0.
+
+[![Watch the Passia backend endpoint demo on YouTube](https://img.youtube.com/vi/lKGI1qEqb1w/hqdefault.jpg)](https://youtu.be/lKGI1qEqb1w)
+
+**[▶ Watch the endpoint demo](https://youtu.be/lKGI1qEqb1w)**
+
+| Resource | Link |
+|---|---|
+| Deployed API | [passiabackend.onrender.com](https://passiabackend.onrender.com) |
+| Public readiness check | [Actuator readiness](https://passiabackend.onrender.com/actuator/health/readiness) |
+| Recorded demonstration | [YouTube — Passia backend demo](https://youtu.be/lKGI1qEqb1w) |
+
+The demonstration covers:
+
+- pet registration, retrieval, updates and deactivation with history preservation;
+- idempotent registration to prevent duplicate creation;
+- walk planning, editing, starting and completion;
+- batched location tracking and walk summaries;
+- walk cancellation and interruption;
+- expected business-rule rejections for invalid operations.
+
+Protected endpoints require a valid Auth0 access token and enforce Tutor ownership server-side. The readiness endpoint is public. The demo shows implemented MVP features; it does not represent a completed platform or a commercial service. Advanced production hardening remains part of the evolution roadmap.
+
+---
+
 ## Executive Summary
 
 The Passia backend is currently implemented as a **modular monolith** using Java and Spring Boot.
@@ -597,7 +624,7 @@ without requiring the domain model to change.
 
 The current MVP does **not** require Kubernetes.
 
-The development environment uses a managed container runtime because it provides enough capability for the current traffic and operational requirements.
+The online MVP environment uses a managed container runtime because it provides enough capability for the current traffic and operational requirements.
 
 This keeps infrastructure proportional to product maturity.
 
@@ -611,7 +638,7 @@ This keeps infrastructure proportional to product maturity.
 >
 > `docs/images/05-deployment-architecture.png`
 
-Current development topology:
+Current online MVP topology:
 
 ```text
 Git Repository
@@ -631,7 +658,7 @@ Spring Boot Backend
 Managed PostgreSQL
 ```
 
-The backend and database run in the same cloud region in the development environment.
+The backend and database run in the same cloud region in the deployed MVP environment.
 
 Secrets are provided through runtime configuration and are never committed to source control.
 
@@ -714,7 +741,7 @@ Architecture is evaluated not only by feature delivery but by non-functional req
 
 The backend exposes Spring Boot Actuator health capabilities.
 
-Development readiness endpoint:
+Public readiness endpoint for the deployed MVP:
 
 ```text
 /actuator/health/readiness
@@ -1268,7 +1295,11 @@ JWT validation
 Domain identity mapping
 Server-side ownership
 Docker
-Cloud development environment
+Online MVP demonstration environment on Render
+Pet registration, updates and deactivation
+Idempotent pet registration
+Walk planning, editing, starting, completion, cancellation and interruption
+Batched location tracking and walk summaries
 Health/readiness
 Automated tests
 Architecture documentation
@@ -1277,10 +1308,8 @@ Architecture documentation
 Still evolving:
 
 ```text
-Walk lifecycle implementation
-Route integration
-Tracking
-Offline synchronization
+External route provider integration
+Expanded offline synchronization
 Realtime capabilities
 Analytics
 Production-grade CI/CD
@@ -1365,18 +1394,22 @@ Software Architecture • Solution Architecture • Technical Leadership • Jav
 
 ## Project Status
 
-**Development paused — Portfolio / MVP**
+**Development paused — Personal Portfolio / Online MVP Demo**
 
-Passia is currently paused due to a temporary health-related leave by its creator.
+Passia’s regular development remains paused due to its creator’s medical leave. This is a personal portfolio project with no remuneration.
 
-The repository is preserved as an architecture and engineering portfolio case study, documenting the technical decisions, implemented components, tests, security model and evolution strategy developed up to the current project checkpoint.
+The repository is preserved as an architecture and engineering case study, documenting technical decisions, implemented components, tests, the security model and the evolution strategy.
 
 ### Current availability
 
-This repository should **not be considered a currently operational production application**.
+The MVP backend is now hosted online on Render for technical demonstrations. The video shows the implemented pet management, walk lifecycle and tracking endpoints being exercised through Postman.
 
-The architecture and implemented components remain available for technical review, but the complete Passia ecosystem may not be running continuously and external development services may be unavailable.
+This technical availability does not mean that the complete Passia platform is fully operational, commercially launched or under continuous development. The project is not offered as a commercial service.
+
+- **MVP demo API:** [https://passiabackend.onrender.com](https://passiabackend.onrender.com)
+- **Readiness:** [Public health check](https://passiabackend.onrender.com/actuator/health/readiness)
+- **Endpoint demo:** [Watch on YouTube](https://youtu.be/lKGI1qEqb1w)
+- **Authentication:** Auth0 access token required for protected API endpoints.
 
 Development may resume when circumstances allow.
 
-**Last active development checkpoint:** Jan 2026.
